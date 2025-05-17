@@ -10,6 +10,15 @@ export class BlogService {
         image: data.image,
         authorId: data.authorId,
       },
+      include: {
+        author: {
+          select: {
+            id: true,
+            name: true,
+            profilePicture: true
+          }
+        }
+      }
     });
   }
 
@@ -18,12 +27,80 @@ export class BlogService {
       orderBy: {
         createdAt: 'desc',
       },
+      include: {
+        author: {
+          select: {
+            id: true,
+            name: true,
+            profilePicture: true
+          }
+        },
+        comments: {
+          include: {
+            author: {
+              select: {
+                id: true,
+                name: true,
+                profilePicture: true
+              }
+            },
+            replies: {
+              include: {
+                author: {
+                  select: {
+                    id: true,
+                    name: true,
+                    profilePicture: true
+                  }
+                }
+              }
+            }
+          },
+          orderBy: {
+            createdAt: 'desc'
+          }
+        }
+      }
     });
   }
 
   async getBlogById(id: number): Promise<Blog | null> {
     return prisma.blog.findUnique({
       where: { id },
+      include: {
+        author: {
+          select: {
+            id: true,
+            name: true,
+            profilePicture: true
+          }
+        },
+        comments: {
+          include: {
+            author: {
+              select: {
+                id: true,
+                name: true,
+                profilePicture: true
+              }
+            },
+            replies: {
+              include: {
+                author: {
+                  select: {
+                    id: true,
+                    name: true,
+                    profilePicture: true
+                  }
+                }
+              }
+            }
+          },
+          orderBy: {
+            createdAt: 'desc'
+          }
+        }
+      }
     });
   }
 
@@ -35,6 +112,15 @@ export class BlogService {
         description: data.description,
         image: data.image,
       },
+      include: {
+        author: {
+          select: {
+            id: true,
+            name: true,
+            profilePicture: true
+          }
+        }
+      }
     });
   }
 
@@ -50,6 +136,40 @@ export class BlogService {
       orderBy: {
         createdAt: 'desc',
       },
+      include: {
+        author: {
+          select: {
+            id: true,
+            name: true,
+            profilePicture: true
+          }
+        },
+        comments: {
+          include: {
+            author: {
+              select: {
+                id: true,
+                name: true,
+                profilePicture: true
+              }
+            },
+            replies: {
+              include: {
+                author: {
+                  select: {
+                    id: true,
+                    name: true,
+                    profilePicture: true
+                  }
+                }
+              }
+            }
+          },
+          orderBy: {
+            createdAt: 'desc'
+          }
+        }
+      }
     });
   }
 } 

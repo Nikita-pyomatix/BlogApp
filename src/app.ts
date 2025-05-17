@@ -3,6 +3,7 @@ import cors from "cors";
 import path from "path";
 import authRoutes from "./routes/authRoutes";
 import blogRoutes from "./routes/blogRoutes";
+import commentRoutes from "./routes/commentRoutes";
 import expressFileupload from "express-fileupload";
 
 const app = express();
@@ -32,5 +33,6 @@ app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/blogs", blogRoutes);
+app.use("/api/comments", commentRoutes);
 
 export default app;
